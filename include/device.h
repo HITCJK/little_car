@@ -2,7 +2,7 @@
 #include "motor.h"
 #include "infrared.h"
 
-motor motor_l(ENCODER_A_L, ENCODER_B_L, PWML, DIR_L, 0.0);
-motor motor_r(ENCODER_A_R, ENCODER_B_R, PWMR, DIR_R, 0.0);
+extern motor motor_l;
+extern motor motor_r;
 
-infrared infrared_1(INFRARED_PIN_1, INFRARED_PIN_2, INFRARED_PIN_3, INFRARED_PIN_4, INFRARED_PIN_5, INFRARED_PIN_6, INFRARED_PIN_7, INFRARED_PIN_8);
+extern infrared infrared_1;

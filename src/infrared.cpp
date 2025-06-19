@@ -20,10 +20,10 @@ void infrared::read()
     }
 }
 
-unsigned char infrared::get_error()
+int infrared::get_error()
 {
-    unsigned char error = 0;
-    unsigned char num = 0;
+    int error = 0;
+    int num = 0;
     for (int i = 0; i < 8; i++)
     {
         if (data[i])
@@ -32,5 +32,5 @@ unsigned char infrared::get_error()
             num++;
         }
     }
-    return error / num - 7;
+    return -(error / num - 7);
 }

@@ -8,7 +8,8 @@ void line_follow()
     static float speed_l = 0;
     static float speed_r = 0;
     static int last_turn = 0;
-    static int count_down = 0;
+    static int count_back = 0;
+    static int count_status = 0;
 
     float error = 0;
     float output = 0;
@@ -19,10 +20,19 @@ void line_follow()
         return;
     }
 
-    if (count_down > 0)
+    if (count_back > 0)
     {
-        count_down--;
+        count_back--;
         return;
+    }
+
+    if(count_status > 0)
+    {
+        count_status--;
+        if (count_status == 0)
+        {
+            last_turn = 0;
+        }
     }
 
     infrared_1.read();
@@ -50,14 +60,16 @@ void line_follow()
         }
         break;
     case 1: // left
-        speed_l = 0;
+        speed_l = -MAX_SPEED;
         speed_r = -MAX_SPEED;
         last_turn = 1;
+        count_status = 15;
         break;
     case -1: // right
-        speed_r = 0;
+        speed_r = MAX_SPEED;
         speed_l = MAX_SPEED;
         last_turn = -1;
+        count_status = 15;
         break;
     case 2: // stop
         speed_l = 0;
@@ -88,9 +100,7 @@ void line_follow()
                 speed_r = -MAX_SPEED;
             }
         }
-        if (infrared_1.get_status() != 0)
-            last_turn = 0;
-        count_down = 8;
+        count_back = 8;
         break;
     }
     motor_l.chang_target(speed_l);

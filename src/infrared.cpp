@@ -20,25 +20,46 @@ void infrared::read()
     }
 }
 
-int infrared::get_error()
+int infrared::get_status()
 {
-    int error = 0;
     int num = 0;
+    int sum = 0;
     for (int i = 0; i < 8; i++)
     {
         if (data[i])
         {
-            error += 2 * i;
+            sum += i;
             num++;
         }
     }
-    if(num == 0)
+    if (num == 8)
     {
-        return 0; // No line detected
+        return 2; // destination
     }
-    if(num == 8)
+    if (num < 3)
     {
-        return 8; // All sensors detect the line
+        return 0; // normal
     }
-    return -(error / num - 7);
+    sum /= num;
+    if (sum < 3.5)
+    {
+        return -1; // left
+    }
+    else
+    {
+        return 1; // right
+    }
+}
+
+float infrared::get_error()
+{
+    int error = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        if (data[i])
+        {
+            error += -((2 * i - 7) / abs(2 * i - 7)) * pow(2, abs(2 * i - 7) / 2);
+        }
+    }
+    return error;
 }

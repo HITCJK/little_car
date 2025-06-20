@@ -23,7 +23,7 @@
 #define PWMR (12) // 用于电机 2 的 PWM 输出，调节电机速度
 #define DIR_R (7)  // 用于电机 2 的转动方向控制
 
-#define PERIOD (20) // PID控制周期，单位为 ms
+#define PERIOD (15) // PID控制周期，单位为 ms
 #define kp (6)
 #define TI (100)
 #define TD (15)
@@ -32,10 +32,10 @@
 
 /* ------------------------------- LINE_FOLLW ------------------------------- */
 
-#define Kp (5)
+#define Kp (2.5)
 #define Ki (0)
-#define Kd (5)
+#define Kd (0)
 
-#define MAX_SPEED (15)
+#define MAX_SPEED (10)
 
 /* -------------------------------------------------------------------------- */

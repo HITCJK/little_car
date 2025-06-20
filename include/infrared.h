@@ -14,7 +14,8 @@ public:
     infrared(unsigned char pin1, unsigned char pin2, unsigned char pin3, unsigned char pin4, unsigned char pin5, unsigned char pin6, unsigned char pin7, unsigned char pin8);
     void init();
     void read();
-    int get_error();
+    int get_status();
+    float get_error();
 };
 
 #endif

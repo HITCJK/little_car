@@ -7,6 +7,7 @@ void line_follow()
     static bool stop = false;
     static float speed_l = 0;
     static float speed_r = 0;
+    static int last_turn = 0;
     static int count_down = 0;
 
     float error = 0;
@@ -39,22 +40,24 @@ void line_follow()
         pre_error = error;
         if (output > 0)
         {
-            speed_l = MAX_SPEED - abs(0.1 * output);
-            speed_r = -(MAX_SPEED - abs(0.1 * output)) + output;
+            speed_l = MAX_SPEED;
+            speed_r = -MAX_SPEED + output;
         }
         else
         {
-            speed_l = (MAX_SPEED - abs(0.1 * output)) + output;
-            speed_r = -(MAX_SPEED - abs(0.1 * output));
+            speed_l = MAX_SPEED + output;
+            speed_r = -MAX_SPEED;
         }
         break;
     case 1: // left
         speed_l = 0;
         speed_r = -MAX_SPEED;
+        last_turn = 1;
         break;
     case -1: // right
         speed_r = 0;
         speed_l = MAX_SPEED;
+        last_turn = -1;
         break;
     case 2: // stop
         speed_l = 0;
@@ -62,18 +65,32 @@ void line_follow()
         stop = true;
         break;
     case -2: // out
-        if (speed_l + speed_r > 0)
+        if (last_turn == 1)
+        {
+            speed_l = -2 * MAX_SPEED;
+            speed_r = -MAX_SPEED;
+        }
+        else if (last_turn == -1)
         {
             speed_l = MAX_SPEED;
-            speed_r = 2*MAX_SPEED;
+            speed_r = 2 * MAX_SPEED;
         }
         else
         {
-            speed_l = -2*MAX_SPEED;
-            speed_r = -MAX_SPEED;
+            if (speed_l + speed_r >= 0)
+            {
+                speed_l = MAX_SPEED;
+                speed_r = 2 * MAX_SPEED;
+            }
+            else
+            {
+                speed_l = -2 * MAX_SPEED;
+                speed_r = -MAX_SPEED;
+            }
         }
+        if (infrared_1.get_status() != 0)
+            last_turn = 0;
         count_down = 8;
-    default:
         break;
     }
     motor_l.chang_target(speed_l);

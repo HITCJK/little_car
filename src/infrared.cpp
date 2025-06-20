@@ -36,6 +36,10 @@ int infrared::get_status()
     {
         return 2; // destination
     }
+    if (num == 0)
+    {
+        return -2; // out
+    }
     if (num < 3)
     {
         return 0; // normal

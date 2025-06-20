@@ -32,27 +32,31 @@ void line_follow()
         pre_error = error;
         if (output > 0)
         {
-            motor_l.chang_target(MAX_SPEED);
-            motor_r.chang_target(-MAX_SPEED + output);
+            motor_l.chang_target(MAX_SPEED - 0.1 * output);
+            motor_r.chang_target(-(MAX_SPEED - 0.1 * output) + output);
         }
         else
         {
-            motor_l.chang_target(MAX_SPEED + output);
-            motor_r.chang_target(-MAX_SPEED);
+            motor_l.chang_target((MAX_SPEED - 0.1 * output) + output);
+            motor_r.chang_target(-(MAX_SPEED - 0.1 * output));
         }
         break;
     case 1: // left
-        motor_l.chang_target(0);
-        motor_r.chang_target(-MAX_SPEED);
+        motor_l.chang_target(-MAX_SPEED);
+        motor_r.chang_target(-MAX_SPEED / 2);
         break;
     case -1: // right
+        motor_r.chang_target(MAX_SPEED / 2);
         motor_l.chang_target(MAX_SPEED);
-        motor_r.chang_target(0);
         break;
     case 2: // stop
         motor_l.chang_target(0);
         motor_r.chang_target(0);
         stop = true;
+        break;
+    case -2: // out
+        motor_l.chang_target(-MAX_SPEED / 2);
+        motor_r.chang_target(MAX_SPEED / 2);
     default:
         break;
     }

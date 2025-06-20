@@ -24,7 +24,7 @@
 #define DIR_R (7)  // 用于电机 2 的转动方向控制
 
 #define PERIOD (15) // PID控制周期，单位为 ms
-#define kp (6)
+#define kp (10)
 #define TI (100)
 #define TD (15)
 

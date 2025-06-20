@@ -39,13 +39,13 @@ void line_follow()
         pre_error = error;
         if (output > 0)
         {
-            speed_l = MAX_SPEED - 0.1 * output;
-            speed_r = -(MAX_SPEED - 0.1 * output) + output;
+            speed_l = MAX_SPEED - abs(0.1 * output);
+            speed_r = -(MAX_SPEED - abs(0.1 * output)) + output;
         }
         else
         {
-            speed_l = (MAX_SPEED - 0.1 * output) + output;
-            speed_r = -(MAX_SPEED - 0.1 * output);
+            speed_l = (MAX_SPEED - abs(0.1 * output)) + output;
+            speed_r = -(MAX_SPEED - abs(0.1 * output));
         }
         break;
     case 1: // left

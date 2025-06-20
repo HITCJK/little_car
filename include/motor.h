@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include "paremeter.h"
 
+#ifndef MOTOR_H
+#define MOTOR_H
+
 class motor
 {
 private:
@@ -22,3 +25,5 @@ public:
     void control();
     void chang_target(float target);
 };
+
+#endif

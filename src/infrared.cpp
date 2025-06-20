@@ -32,5 +32,13 @@ int infrared::get_error()
             num++;
         }
     }
+    if(num == 0)
+    {
+        return 0; // No line detected
+    }
+    if(num == 8)
+    {
+        return 8; // All sensors detect the line
+    }
     return -(error / num - 7);
 }

@@ -65,12 +65,12 @@ void motor::control()
     int output = pidcontrol(target, velocity);
     if (output > 0)
     {
-        digitalWrite(dir, LOW);
+        digitalWrite(dir, HIGH);
         analogWrite(pwm, output);
     }
     else
     {
-        digitalWrite(dir, HIGH);
+        digitalWrite(dir, LOW);
         analogWrite(pwm, abs(output));
     }
     encoder_val = 0;

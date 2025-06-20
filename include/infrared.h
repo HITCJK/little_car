@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include "paremeter.h"
 
+#ifndef INFRARED_H
+#define INFRARED_H
+
 class infrared
 {
 private:
@@ -13,3 +16,5 @@ public:
     void read();
     int get_error();
 };
+
+#endif

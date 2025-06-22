@@ -9,67 +9,78 @@
 Servo myservo1;
 Servo myservo2;
 
-#define  SERVO_PIN1  9
-#define  SERVO_PIN2  8
+#define SERVO_PIN1 9
+#define SERVO_PIN2 8
 
-unsigned  int  PWM1=0;
-unsigned  int  PWM2=0;
+unsigned int PWM1 = 0;
+unsigned int PWM2 = 0;
 
-void singleServoControl(){
-int i=0;
-if(jud==0)
+void singleServoControl()
 {
-PWM1=50;
-PWM2=1450;
-myservo1.writeMicroseconds(50);
-delay(1000);
-for(i=0;i<20;i++){//舵机从50状态转到2450,每次增加50
-PWM2=PWM2+50;
-myservo2.writeMicroseconds(PWM2);
-delay(30);      //给舵机写入 PWM//延时10ms 让舵机转到指定位置
-}
-delay(800);
-for(i=0;i<17;i++)
-{
-  PWM1=PWM1+50;
-  myservo1.writeMicroseconds(PWM1);
-  delay(30);
-}
-delay(800);
-for(i=19;i>=0;i--){
-PWM2=PWM2-50;
-myservo2.writeMicroseconds(PWM2);
-delay(30);
-}
-jud=1;
-}
+    int i = 0;
+    if (jud == 0)
+    {
+        PWM1 = 50;
+        PWM2 = 1450;
+        myservo1.writeMicroseconds(50);
+        delay(1000);
+        for (i = 0; i < 24; i++)
+        { // 舵机从50状态转到2450,每次增加50
+            PWM2 = PWM2 + 50;
+            myservo2.writeMicroseconds(PWM2);
+            delay(30); // 给舵机写入 PWM//延时10ms 让舵机转到指定位置
+        }
+        delay(800);
+        for (i = 0; i < 19; i++)
+        {
+            PWM1 = PWM1 + 50;
+            myservo1.writeMicroseconds(PWM1);
+            delay(30);
+        }
+        delay(800);
+        for (i = 23; i >= 0; i--)
+        {
+            PWM2 = PWM2 - 50;
+            myservo2.writeMicroseconds(PWM2);
+            delay(30);
+        }
+        jud = 1;
+    }
 
-else if(jud==2)
-{
-PWM1=900;
-PWM2=1450;
-myservo1.writeMicroseconds(900);
-delay(1000);
-for(i=0;i<20;i++){//舵机从50状态转到2450,每次增加50
-PWM2=PWM2+50;
-myservo2.writeMicroseconds(PWM2);
-delay(30);      //给舵机写入 PWM//延时10ms 让舵机转到指定位置
-}
-delay(800);
-for(i=0;i<17;i++)
-{
-  PWM1=PWM1-50;
-  myservo1.writeMicroseconds(PWM1);
-  delay(30);
-}
-delay(800);
-for(i=19;i>=0;i--){
-PWM2=PWM2-50;
-myservo2.writeMicroseconds(PWM2);
-delay(30);
-}
-jud=1;
-}
+    else if (jud == 2)
+    {
+        motor_l.chang_target(MAX_SPEED);
+        motor_r.chang_target(-MAX_SPEED);
+        delay(1000);
+        motor_l.chang_target(0);
+        motor_r.chang_target(0);
+        delay(1000);
+        PWM1 = 1000;
+        PWM2 = 1450;
+        myservo1.writeMicroseconds(1000);
+        delay(1000);
+        for (i = 0; i < 24; i++)
+        { // 舵机从50状态转到2450,每次增加50
+            PWM2 = PWM2 + 50;
+            myservo2.writeMicroseconds(PWM2);
+            delay(30); // 给舵机写入 PWM//延时10ms 让舵机转到指定位置
+        }
+        delay(800);
+        for (i = 0; i < 19; i++)
+        {
+            PWM1 = PWM1 - 50;
+            myservo1.writeMicroseconds(PWM1);
+            delay(30);
+        }
+        delay(800);
+        for (i = 23; i >= 0; i--)
+        {
+            PWM2 = PWM2 - 50;
+            myservo2.writeMicroseconds(PWM2);
+            delay(30);
+        }
+        jud = 1;
+    }
 }
 
 /* -------------------------------- MOTOR SET ------------------------------- */
@@ -86,7 +97,7 @@ void motor_control()
     // static int count = 0;
     // count = (count + 1) % 5;
     // if (count == 0)
-        line_follow();
+    line_follow();
     motor_l.control();
     motor_r.control();
 }

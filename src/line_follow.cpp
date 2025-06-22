@@ -1,7 +1,9 @@
 #include "line_follow.h"
 
+int jud=0;
+
 void line_follow()
-{
+{ 
     static int pre_error = 0;
     static int integral = 0;
     static bool stop = false;
@@ -74,6 +76,7 @@ void line_follow()
     case 2: // stop
         speed_l = 0;
         speed_r = 0;
+        jud = 2;
         stop = true;
         break;
     case -2: // out

@@ -9,11 +9,11 @@
 Servo myservo1;
 Servo myservo2;
 
-#define  SERVO_PIN1  9
-#define  SERVO_PIN2  8
+#define SERVO_PIN1 9
+#define SERVO_PIN2 8
 
-unsigned  int  PWM1=0;
-unsigned  int  PWM2=0;
+unsigned int PWM1 = 0;
+unsigned int PWM2 = 0;
 
 void singleServoControl(){
 int i=0;
@@ -92,7 +92,7 @@ void motor_control()
     // static int count = 0;
     // count = (count + 1) % 5;
     // if (count == 0)
-        line_follow();
+    line_follow();
     motor_l.control();
     motor_r.control();
 }

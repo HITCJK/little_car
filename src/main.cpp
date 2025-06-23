@@ -46,6 +46,12 @@ jud=1;
 
 else if(jud==2)
 {
+motor_l.chang_target(MAX_SPEED);
+motor_r.chang_target(-MAX_SPEED);
+delay(1000);
+motor_l.chang_target(0);
+motor_r.chang_target(0);
+delay(1000);
 PWM1=900;
 PWM2=1600;
 myservo1.writeMicroseconds(900);
